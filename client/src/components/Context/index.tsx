@@ -52,9 +52,6 @@ export const AppContextProvider = ({ children }: any) => {
     }
   }, [musicData]);
 
-  useEffect(() => {
-    console.log("provider end")
-  }, [])
   const providerValue = useMemo(() => [state, dispatch], [state]);
 
   return (

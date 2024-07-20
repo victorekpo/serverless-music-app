@@ -24,9 +24,7 @@ const App = () => {
           <ApolloProvider client={client}>
             <AppContextProvider>
               <NextUIProvider>
-
                 <Outlet/>
-
               </NextUIProvider>
             </AppContextProvider>
           </ApolloProvider>

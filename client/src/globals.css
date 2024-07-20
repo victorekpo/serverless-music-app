@@ -49,6 +49,24 @@ input {
     font-size: 16px !important;
 }
 
+.main-container {
+    margin-bottom: 100px;
+}
+
+.main-navbar {
+    position: relative;
+    z-index: 999;
+}
+
+.page-container {
+    height: auto;
+}
+
+.footer-container {
+    width: 100%;
+    bottom: 0;
+}
+
 @media (max-width: 1536px) {
     .body-container {
         width: 1366px;

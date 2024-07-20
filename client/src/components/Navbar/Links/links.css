@@ -1,3 +1,7 @@
+.links-container {
+    min-width: 500px;
+}
+
 .links-items {
     display: flex;
     align-items: center;
@@ -11,10 +15,14 @@
 }
 
 .links-menu-button, .links-mobile-links {
-    display:none;
+    display: none;
 }
 
 @media (max-width: 768px) {
+    .links-container {
+        min-width: unset;
+    }
+
     .links-items {
         display: none;
     }
@@ -24,6 +32,7 @@
         cursor: pointer;
         transition: height 2s ease-in-out;
     }
+
     .links-mobile-links {
         position: fixed;
         top: 70px;
