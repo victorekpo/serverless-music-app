@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useReducer, useState } from "react";
+import { createContext, useContext, useEffect, useReducer, useMemo } from "react";
 import { reducer } from './reducers';
 import { useQuery } from "@apollo/client";
 import { GET_ALL_MUSIC_QUERY } from "@/graphql/queries/getMusic";
@@ -23,47 +23,38 @@ const initialState = {
 };
 
 export const AppContextProvider = ({ children }: any) => {
-  // prefetch data based on current user
+  const cached = localStorage.getItem("musicData");
+
   const { data: musicData } = useQuery(GET_ALL_MUSIC_QUERY, {
-    variables: { user }
+    variables: { user },
+    skip: !!cached // Skip query if cached data is available
   });
-  // const musicData = {
-  //   getAllMusic: {
-  //     songs: [
-  //       {
-  //         song: 'in your dress',
-  //         songInfo: {
-  //           artist: 'algoriddim.v',
-  //           song: 'in your dress'
-  //         }
-  //       }
-  //     ]
-  //   }
-  // }
+
   const [state, dispatch] = useReducer(reducer, { ...initialState });
 
-  // useEffect(() => {
-  //   const cached = localStorage.getItem("musicData");
-  //   if (cached) {
-  //     dispatch({
-  //       type: SET_ALL_MUSIC,
-  //       payload: JSON.parse(cached).getAllMusic
-  //     });
-  //   }
-  // },[]);
+  useEffect(() => {
+    if (cached) {
+      dispatch({
+        type: SET_ALL_MUSIC,
+        payload: JSON.parse(cached).getAllMusic
+      });
+    }
+  }, [cached]);
 
-  // useEffect(() => {
-  //   if (musicData) {
-  //     dispatch({
-  //       type: SET_ALL_MUSIC,
-  //       payload: musicData.getAllMusic
-  //     });
-  //     localStorage.setItem("musicData", JSON.stringify(musicData));
-  //   }
-  // },[musicData]);
+  useEffect(() => {
+    if (musicData) {
+      dispatch({
+        type: SET_ALL_MUSIC,
+        payload: musicData.getAllMusic
+      });
+      localStorage.setItem("musicData", JSON.stringify(musicData));
+    }
+  }, [musicData]);
+
+  const providerValue = useMemo(() => [state, dispatch], [state]);
 
   return (
-    <AppContext.Provider value={ [state, dispatch] }>
+    <AppContext.Provider value={providerValue}>
       {children}
     </AppContext.Provider>
   );
