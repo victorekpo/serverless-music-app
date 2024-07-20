@@ -3,6 +3,7 @@ import { Table } from 'aws-cdk-lib/aws-dynamodb';
 import { LayerVersion, Runtime } from 'aws-cdk-lib/aws-lambda';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { join } from 'path';
+import { Duration } from 'aws-cdk-lib';
 
 /**
  * Create Lambda Function for backend
@@ -48,6 +49,8 @@ export const createLambda = ({ scope, id, handler, environment, layers }: {
   return new NodejsFunction(scope, id, {
     runtime: Runtime.NODEJS_20_X,
     entry: join('src', 'functions', handler),
+    memorySize: 512, // Set memory size to 512 MB
+    timeout: Duration.seconds(30), // Set timeout to 30 seconds
     environment: {
       ...(environment && { ...environment }),
     },
