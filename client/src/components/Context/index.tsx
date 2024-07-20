@@ -24,17 +24,17 @@ const initialState = {
 
 export const AppContextProvider = ({ children }: any) => {
   const cached = localStorage.getItem("musicData");
-  console.log("context provider here")
 
   const { data: musicData } = useQuery(GET_ALL_MUSIC_QUERY, {
     variables: { user },
-    // skip: !!cached // Skip query if cached data is available
+    skip: !!cached // Skip query if cached data is available
   });
 
   const [state, dispatch] = useReducer(reducer, { ...initialState });
 
   useEffect(() => {
     if (cached) {
+      console.log("Using Cached Music")
       dispatch({
         type: SET_ALL_MUSIC,
         payload: JSON.parse(cached).getAllMusic
@@ -52,8 +52,11 @@ export const AppContextProvider = ({ children }: any) => {
     }
   }, [musicData]);
 
+  useEffect(() => {
+    console.log("provider end")
+  }, [])
   const providerValue = useMemo(() => [state, dispatch], [state]);
-  console.log("provider end")
+
   return (
     <AppContext.Provider value={providerValue}>
       {children}

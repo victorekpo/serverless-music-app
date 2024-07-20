@@ -22,7 +22,7 @@ module.exports = {
         createProxyMiddleware({
           target: `${ process.env.API_URL }/graphql`, // Your GraphQL server address
           changeOrigin: true,
-          pathRewrite: { '^/graphql': '' }, // Optional: Adjust the path if needed
+          pathRewrite: { '^/graphql': '' }
         })
       );
       return middlewares;

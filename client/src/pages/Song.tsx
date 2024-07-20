@@ -11,14 +11,11 @@ import type { SongInfo } from "@/@types/Music";
 
 const SongPage = () => {
   const { songId } = useParams();
-  console.log("SONG ID", songId);
 
   const [state, dispatch] = useCtx() as any;
-  const { user } = state;
+  const { user, music } = state;
   const [edit, setEdit] = useState(false);
   const [formState, setFormState] = useState({}) as any;
-  const { music } = state;
-  console.log("MUSIC", music);
 
   // Type-check and handle undefined songId
   const validSongId = typeof songId === 'string' ? songId : '';
@@ -35,7 +32,7 @@ const SongPage = () => {
   const found = useMemo(() => {
     const ignoredKeys = ['__typename'];
     const f = music?.songs.find((s: any) => s.song === songTrack)
-    
+
     if (f) {
       const s = { ...f, songInfo: { ...f.songInfo } };
       ignoredKeys.forEach(k => {
@@ -43,6 +40,7 @@ const SongPage = () => {
       });
       return s;
     }
+    console.log("SONG ID", songId, songTrack);
   }, [music, songTrack]);
 
   const [song, setSong] = useState(found);
