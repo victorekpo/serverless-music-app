@@ -1,0 +1,27 @@
+{
+  "name": "serverless-microapp-cf-lambda",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "prepare": "husky",
+    "deploy": "npm run deploy-server && npm run deploy-client",
+    "deploy-client": "cd client && npm run deploy",
+    "deploy-server": "cd server && npm run deploy",
+    "test": "npm run test-server",
+    "test-client": "cd client && npm run test",
+    "test-server": "cd server && npm run test",
+    "install": "npm run install-client && npm run install-server",
+    "install-client": "cd client && npm i",
+    "install-server": "cd server && npm i",
+    "develop": "npm run start-server && npm run start-client",
+    "start-client": "cd client && npm run dev",
+    "start-server": "cd server && npm run dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "husky": "^9.0.11"
+  }
+}

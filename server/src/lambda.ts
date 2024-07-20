@@ -1,0 +1,56 @@
+import { Construct } from 'constructs';
+import { Table } from 'aws-cdk-lib/aws-dynamodb';
+import { LayerVersion, Runtime } from 'aws-cdk-lib/aws-lambda';
+import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
+import { join } from 'path';
+
+/**
+ * Create Lambda Function for backend
+ */
+
+export const createLambdaFunctions = (scope: Construct, createFn: any, layers: LayerVersion[]) => {
+  const createFnWithLayers = (args: Record<string, any>) => {
+    return createFn({ ...args, layers });
+  };
+
+  // Lambda
+  const graphqlServerLambda = createFnWithLayers({
+    scope,
+    id: 'graphqlHandler',
+    handler: join('backend', 'graphql', 'index.ts'),
+    environment: {
+      MONGODB_URI: process.env.MONGODB_URI
+    }
+  });
+
+  return {
+    graphqlServerLambda
+  };
+};
+
+/**
+ * Utility method to create Lambda blueprint
+ * @param scope
+ * @param id
+ * @param handler
+ * @param environment
+ * @param layers
+ */
+
+export const createLambda = ({ scope, id, handler, environment, layers }: {
+  scope: Construct;
+  id: string;
+  handler: string;
+  environment: Record<string, string>,
+  tables: Table[] | null;
+  layers?: LayerVersion[] | undefined;
+}) => {
+  return new NodejsFunction(scope, id, {
+    runtime: Runtime.NODEJS_20_X,
+    entry: join('src', 'functions', handler),
+    environment: {
+      ...(environment && { ...environment }),
+    },
+    ...(layers && { layers })
+  });
+};

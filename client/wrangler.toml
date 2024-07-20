@@ -1,0 +1,18 @@
+name = "music-app"
+account_id = "**********"
+workers_dev = true
+compatibility_date = "2024-07-11"
+main = "src/index.ts"
+
+[site]
+bucket = "./dist"
+
+[build]
+command = "npm run build"
+
+[[routes]]
+pattern = "**********"
+custom_domain = true
+
+[vars]
+API_URL = "**********"
