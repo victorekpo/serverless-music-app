@@ -1,5 +1,7 @@
 const path = require('path');
+require('dotenv').config({ path: path.resolve(process.cwd(), '..', '.env.server') });
 const config = require('./webpack.config.js'); // Import your existing webpack config
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
 module.exports = {
   ...config,
@@ -13,7 +15,18 @@ module.exports = {
     compress: true, // Enable gzip compression
     port: 3000, // Port to run dev server on
     hot: true, // Enable hot module replacement,
-    historyApiFallback: true // This option is crucial for handling client-side routing
+    historyApiFallback: true, // This option is crucial for handling client-side routing
+    setupMiddlewares: (middlewares, devServer) => {
+      devServer.app.use(
+        '/graphql', // The endpoint you want to proxy
+        createProxyMiddleware({
+          target: `${ process.env.API_URL }/graphql`, // Your GraphQL server address
+          changeOrigin: true,
+          pathRewrite: { '^/graphql': '' }, // Optional: Adjust the path if needed
+        })
+      );
+      return middlewares;
+    },
   },
   optimization: {
     ...config.optimization,

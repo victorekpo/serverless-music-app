@@ -15,26 +15,28 @@ const client = new ApolloClient({
 const App = () => {
   return (
     <>
-    <div className="main-container">
-      <div className="main-navbar">
-        <Navbar/>
+      <div className="main-container">
+        <div className="main-navbar">
+          <Navbar/>
+        </div>
+        <div><Toaster/></div>
+        <div className="page-container">
+          <ApolloProvider client={client}>
+            <AppContextProvider>
+              <NextUIProvider>
+
+                <Outlet/>
+
+              </NextUIProvider>
+            </AppContextProvider>
+          </ApolloProvider>
+        </div>
       </div>
-      <div><Toaster/></div>
-      <div className="page-container">
-        <ApolloProvider client={client}>
-        <NextUIProvider>
-          <AppContextProvider>
-            <Outlet/>
-          </AppContextProvider>
-        </NextUIProvider>
-        </ApolloProvider>
+      <div className="footer-container">
+        <Footer/>
       </div>
-    </div>
-  <div className="footer-container">
-    <Footer/>
-  </div>
     </>
-);
+  );
 };
 
 export default App;
