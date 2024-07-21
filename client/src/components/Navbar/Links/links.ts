@@ -10,5 +10,13 @@ export const menuLinks = [
   {
     title: "Add Music",
     path: "/add",
+  },
+  {
+    title: "Latest News",
+    path: "/news"
+  },
+  {
+    title: "DJ Spotlight",
+    path: "/blog"
   }
 ];

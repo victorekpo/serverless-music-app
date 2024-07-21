@@ -8,7 +8,8 @@ const top20Songs = new Array(20).fill(null);
 const DashboardPage = () => {
   return (
     <>
-      <h1>Dashboard</h1>
+      <h4 style={{ textAlign: "center", marginTop: 20, fontSize: 14 }}>Good day! Browse the most popular genres and
+        songs.</h4>
       <br/>
       <div className='db-top-4-genres'
            style={{
@@ -46,7 +47,7 @@ const DashboardPage = () => {
       </div>
 
       <hr style={{ borderColor: "#162033" }}/>
-      
+
     </>
   )
 }
