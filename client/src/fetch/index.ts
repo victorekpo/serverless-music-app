@@ -1,6 +1,6 @@
 import { fetchCall } from "@/fetch/call";
 import { retryWithExponentialBackoff } from "@/fetch/retry";
-import { FetchApi } from "@/fetch/types";
+import { FetchApi } from "@/@types/fetch";
 
 /**
  * Fetches data from a given URL with optional retry logic and exponential backoff.

@@ -1,22 +1,22 @@
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from './App';
-import Error from './pages/Error';
-import Home from '@/pages/Home';
-import SongPage from "@/pages/Song";
-import SearchPage from "@/pages/Search";
-import AddMusicPage from "@/pages/Add";
+import ErrorPage from './pages/error';
+import DashboardPage from '@/pages/dashboard';
+import SongPage from "@/pages/song";
+import SearchPage from "@/pages/search";
+import AddMusicPage from "@/pages/add";
 import './globals.css';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App/>,
-    errorElement: <Error/>,
+    errorElement: <ErrorPage/>,
     children: [
       {
         index: true,
-        element: <Home/>,
+        element: <DashboardPage/>,
       },
       {
         path: '/test',
@@ -40,7 +40,6 @@ const router = createBrowserRouter([
   },
 ]);
 
-// Render your React component instead
 // @ts-ignore
 const root = createRoot(document.getElementById('root'));
 root.render(

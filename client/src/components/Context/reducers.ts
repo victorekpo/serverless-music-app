@@ -14,7 +14,6 @@ import {
 export const reducer = (state: Record<string, any>, action: { type: string, payload: any }) => {
   switch (action.type) {
     case SET_ALL_MUSIC:
-      console.log("SETTING ALL MUSIC", action.payload)
       return {
         ...state,
         music: action.payload

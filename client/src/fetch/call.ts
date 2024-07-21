@@ -1,6 +1,6 @@
 import { commonHeaders } from "@/fetch/headers";
 import { validateResponseType } from "@/fetch/validation";
-import { FetchApiCall } from "@/fetch/types";
+import { FetchApiCall } from "@/@types/fetch";
 
 /**
  * Performs a fetch request with retry and exponential backoff.

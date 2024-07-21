@@ -1,4 +1,4 @@
-import { RetryWithExponentialBackoff } from "@/fetch/types";
+import { RetryWithExponentialBackoff } from "@/@types/fetch";
 
 /**
  * Retries a function with exponential backoff.

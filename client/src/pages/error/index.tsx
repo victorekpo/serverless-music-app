@@ -1,7 +1,7 @@
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 
-const Error = () => {
+const ErrorPage = () => {
   return (
     <>
       <div className="main-container">
@@ -19,4 +19,4 @@ const Error = () => {
   );
 };
 
-export default Error;
+export default ErrorPage;
