@@ -6,8 +6,8 @@ import { useMutation } from "@apollo/client";
 import { UPDATE_SONG } from "@/components/Context/actions";
 import { UPDATE_MUSIC_QUERY } from "@/graphql/queries/updateMusic";
 import toast from "react-hot-toast";
+import { Song } from "@/@types/Music";
 import './song.css';
-import type { SongInfo } from "@/@types/Music";
 
 const SongPage = () => {
   const { songId } = useParams();
@@ -31,7 +31,7 @@ const SongPage = () => {
 
   const found = useMemo(() => {
     const ignoredKeys = ['__typename'];
-    const f = music?.songs.find((s: any) => s.song === songTrack)
+    const f = music?.songs.find((s: Song) => s.song === songTrack)
 
     if (f) {
       const s = { ...f, songInfo: { ...f.songInfo } };

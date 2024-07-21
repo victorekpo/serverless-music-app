@@ -9,7 +9,7 @@ import { RepeatOneIcon } from "./RepeatOneIcon";
 import { ShuffleIcon } from "./ShuffleIcon";
 
 // @ts-check
-export const Card = () => {
+export const TrackCard = () => {
   const [liked, setLiked] = useState(false);
 
   return (

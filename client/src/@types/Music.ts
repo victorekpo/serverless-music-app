@@ -1,7 +1,7 @@
-// import { Model, ObjectId } from "mongoose";
+import { ObjectId } from 'bson';
 
 export interface Song {
-  _id: any; // ObjectId;
+  _id: ObjectId;
   song: string;
   songInfo: SongInfo
 }
@@ -19,7 +19,7 @@ export interface SongInfo {
 }
 
 export interface MusicCollection {
-  _id: any; // ObjectId;
+  _id: ObjectId;
   user: string;
   songs: Song[];
   save: any

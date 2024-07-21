@@ -17,6 +17,7 @@
     "@apollo/client": "^3.10.8",
     "@cloudflare/kv-asset-handler": "^0.3.4",
     "@nextui-org/react": "^2.4.2",
+    "bson": "^6.8.0",
     "buffer": "^6.0.3",
     "dotenv": "^16.4.5",
     "framer-motion": "^11.3.2",
