@@ -36,12 +36,15 @@ export const Links = () => {
         )
         }
       </div>
-      <button
-        className="links-menu-button"
-        onClick={() => setOpen(!open)}
-      >
-        Menu
-      </button>
+      <div className="links-mobile-container">
+        <button
+          className="links-menu-button"
+          onClick={() => setOpen(!open)}
+        >
+          Menu
+        </button>
+        {(session && <ProfileBadge/>)}
+      </div>
       {open && (
         <div className="links-mobile-links">
           {links.map(link =>

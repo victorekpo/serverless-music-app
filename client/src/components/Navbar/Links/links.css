@@ -25,6 +25,12 @@
         min-width: unset;
     }
 
+    .links-mobile-container {
+        display: flex;
+        width: 100px;
+        gap: 20px;
+    }
+
     .links-items {
         display: none;
     }
