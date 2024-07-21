@@ -53,6 +53,21 @@
 
 @media (max-width: 640px) {
     .db-top-4-genres {
-        gap: 30px 0;
+        gap: 20px 0;
+        margin-bottom: 40px;
+    }
+
+    .db-top-4-genres section {
+        flex: 0 0 180px;
+    }
+
+    .db-top-20-songs {
+        gap: 20px 20px;
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+
+    .db-top-20-songs section {
+        flex: 0 0 120px;
     }
 }
