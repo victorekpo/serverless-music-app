@@ -46,7 +46,9 @@ a {
 }
 
 hr {
-    border-color: #162033
+    border-color: #162033;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 input {

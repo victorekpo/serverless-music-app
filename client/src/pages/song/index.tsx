@@ -8,6 +8,7 @@ import { UPDATE_MUSIC_QUERY } from "@/graphql/queries/updateMusic";
 import toast from "react-hot-toast";
 import { Song } from "@/@types/Music";
 import './song.css';
+import { Twitter } from "@/components/Cards/Twitter";
 
 const SongPage = () => {
   const { songId } = useParams();
@@ -159,6 +160,8 @@ const SongPage = () => {
           </Button>
         )}
       </form>
+      <hr/>
+      <Twitter/>
     </>
   )
 }

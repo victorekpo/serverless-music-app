@@ -1,6 +1,7 @@
 import { Theme1Card } from "@/components/Cards/Theme1";
 import { Theme2Card } from "@/components/Cards/Theme2";
 import './dashboard.css';
+import { Twitter } from "@/components/Cards/Twitter";
 
 const top4Genres = new Array(4).fill(null);
 const top20Songs = new Array(20).fill(null);
@@ -31,7 +32,6 @@ const DashboardPage = () => {
       </div>
 
       <hr/>
-
     </>
   )
 }

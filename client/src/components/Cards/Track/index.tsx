@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { useState } from "react";
-import { Card as CardComponent, CardBody, Image, Button, Slider } from "@nextui-org/react";
+import { Card, CardBody, Image, Button, Slider } from "@nextui-org/react";
 import { HeartIcon } from "./HeartIcon";
 import { PauseCircleIcon } from "./PauseCircleIcon";
 import { NextIcon } from "./NextIcon";
@@ -13,7 +13,7 @@ export const TrackCard = () => {
   const [liked, setLiked] = useState(false);
 
   return (
-    <CardComponent
+    <Card
       isBlurred
       className="border-none bg-background/60 dark:bg-default-100/50 max-w-[610px]"
       shadow="sm"
@@ -114,6 +114,6 @@ export const TrackCard = () => {
           </div>
         </div>
       </CardBody>
-    </CardComponent>
+    </Card>
   );
 }

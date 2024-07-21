@@ -54,7 +54,7 @@
 @media (max-width: 640px) {
     .db-top-4-genres {
         gap: 20px 0;
-        margin-bottom: 40px;
+        margin-bottom: 30px;
     }
 
     .db-top-4-genres section {
@@ -63,8 +63,8 @@
 
     .db-top-20-songs {
         gap: 20px 20px;
-        margin-top: 40px;
-        margin-bottom: 40px;
+        margin-top: 30px;
+        margin-bottom: 30px;
     }
 
     .db-top-20-songs section {
