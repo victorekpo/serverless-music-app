@@ -16,7 +16,7 @@
     font-size: 11px;
 }
 
-.links-menu-button, .links-mobile-links {
+.links-menu-button, .links-mobile-links, .links-mobile-container {
     display: none;
 }
 
