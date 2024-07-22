@@ -4,12 +4,14 @@ import { healthHandler } from './health/router';
 import { postHandler } from './post/router.js';
 import { rootHandler } from './root/router.js';
 import { routesAndAssetsHandler } from './handler';
+import { spotifyHandler } from "./spotify/router";
 
 export {
-    base64Handler,
-    graphqlHandler,
-    healthHandler,
-    postHandler,
-    rootHandler,
-    routesAndAssetsHandler
+  base64Handler,
+  graphqlHandler,
+  healthHandler,
+  postHandler,
+  rootHandler,
+  routesAndAssetsHandler,
+  spotifyHandler
 }

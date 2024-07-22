@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import { Song } from "@/@types/Music";
 import './song.css';
 import { Twitter } from "@/components/Cards/Twitter";
+import { fetchApi } from "@/fetch";
 
 const SongPage = () => {
   const { songId } = useParams();
@@ -17,6 +18,7 @@ const SongPage = () => {
   const { user, music } = state;
   const [edit, setEdit] = useState(false);
   const [formState, setFormState] = useState({}) as any;
+  const [spotify, setSpotify] = useState(null);
 
   // Type-check and handle undefined songId
   const validSongId = typeof songId === 'string' ? songId : '';
@@ -57,6 +59,17 @@ const SongPage = () => {
       setFormState(song.songInfo);
     }
   }, [song]);
+
+  useEffect(() => {
+    // console.log("TEST")
+    const fetchSpotify = async () => {
+      const { data } = await fetchApi("/spotify")
+      setSpotify(data);
+      console.log("SPOTIFY DATA", data)
+      return data;
+    }
+    fetchSpotify();
+  }, [])
 
   const [updateSong, { error }] = useMutation(UPDATE_MUSIC_QUERY);
 

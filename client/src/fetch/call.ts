@@ -14,7 +14,7 @@ export const fetchCall: FetchApiCall = async (url, options) => {
   console.log("Fetching...", url, JSON.stringify(options, null, 2))
   const response = await fetch(url, {
     method,
-    ...(body && { body: JSON.stringify(body) }),
+    ...(body && { body }),
     headers: {
       ...commonHeaders,
       ...headers,

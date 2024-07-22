@@ -3,7 +3,15 @@ import * as routes from "./routers";
 
 const router = Router();
 
-const { base64Handler, graphqlHandler, healthHandler, postHandler, rootHandler, routesAndAssetsHandler } = routes;
+const {
+  base64Handler,
+  graphqlHandler,
+  healthHandler,
+  postHandler,
+  rootHandler,
+  routesAndAssetsHandler,
+  spotifyHandler
+} = routes;
 
 /**
  * Health route
@@ -20,17 +28,26 @@ router.get('/health', healthHandler);
 router.get("/base64/:text", base64Handler);
 
 /**
+ * Test route for base64 encoding
+ * This route takes a text parameter and returns its base64 encoded version.
+ * When a GET request is made to /base64/:text, it will be handled by the base64Handler.
+ */
+router.get("/spotify", spotifyHandler);
+
+/**
  * Test POST route
  * This route is used to handle POST requests for testing purposes.
  * When a POST request is made to /post, it will be handled by the postHandler.
  */
 router.post("/post", postHandler);
+
 /**
  * Test route for base64 encoding
  * This route takes a text parameter and returns its base64 encoded version.
  * When a GET request is made to /base64/:text, it will be handled by the base64Handler.
  */
 router.post("/graphql", graphqlHandler);
+
 /**
  * Catch-all route for serving the React app
  * This is the last route we define. It will match any route that hasn't been

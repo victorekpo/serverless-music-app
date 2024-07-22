@@ -1,4 +1,4 @@
-import { model, Schema, Document, models } from "mongoose";
+import { model, Schema, Document, models } from 'mongoose';
 
 interface ISongInfo extends Document {
   artist: string;
@@ -10,6 +10,7 @@ interface ISongInfo extends Document {
   mood?: string;
   tags?: string;
   quotes?: string;
+  stats?
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -21,8 +22,13 @@ interface ISongs extends Document {
   updatedAt?: Date;
 }
 
+interface ICollectionStats extends Document {
+
+}
+
 interface IMusicCollection extends Document {
   songs: ISongs[];
+  stats: ICollectionStats;
   user: Schema.Types.ObjectId;
   createdAt?: Date;
   updatedAt?: Date;
@@ -67,6 +73,7 @@ const SongInfoSchema: Schema<ISongInfo> = new Schema({
     type: String,
     trim: true,
   },
+  stats: {},
   createdAt: {
     type: Date,
     default: Date.now,
