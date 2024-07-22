@@ -1,6 +1,6 @@
 import { enhanceWithSpotify } from "@/utils/spotify";
 
-export const getTopLists = async (music) => {
+export const getTopLists = (music) => {
 
   if (!music) {
     console.log("Music not ready or not found")
@@ -33,12 +33,7 @@ export const getTopLists = async (music) => {
   const top4Genres = sortedGenres.map(([genre]) => genre);
 
 // Get top 20 songs
-  const songs = music.songs.slice(0, 5);
-  // Enhance songs with Spotify data asynchronously (use Promise.all)
-  const top20Songs = await Promise.all(songs.map(enhanceWithSpotify));
-
-  // // Sort songs alphabetically (optional)
-  // enhancedSongs.sort((a, b) => a.song.localeCompare(b.song));
+  const top20Songs = music.songs.filter((song => !!song.spotify)).slice(0, 20);
 
   return {
     top4Genres,
