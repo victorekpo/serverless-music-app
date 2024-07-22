@@ -1,4 +1,12 @@
 import { model, Schema, Document, models } from 'mongoose';
+import { SongInfo } from '@/@types/Music';
+
+interface ISongStats extends Document {
+  views: number;
+  plays: number;
+  edits: number;
+  rating: number;
+}
 
 interface ISongInfo extends Document {
   artist: string;
@@ -10,7 +18,7 @@ interface ISongInfo extends Document {
   mood?: string;
   tags?: string;
   quotes?: string;
-  stats?
+  stats?: ISongStats
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -23,7 +31,8 @@ interface ISongs extends Document {
 }
 
 interface ICollectionStats extends Document {
-
+  top4Genres: string[];
+  top20Songs: SongInfo[];
 }
 
 interface IMusicCollection extends Document {
@@ -73,7 +82,14 @@ const SongInfoSchema: Schema<ISongInfo> = new Schema({
     type: String,
     trim: true,
   },
-  stats: {},
+  stats: {
+    type: {
+      views: { type: Number, default: 0 },
+      plays: { type: Number, default: 0 },
+      edits: { type: Number, default: 0 },
+      rating: { type: Number, default: 0 }
+    },
+  },
   createdAt: {
     type: Date,
     default: Date.now,
@@ -117,6 +133,12 @@ const MusicCollectionsSchema: Schema<IMusicCollection> = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'user',
     required: true,
+  },
+  stats: {
+    type: {
+      top4Genres: { type: [String], default: [] },
+      top20Songs: { type: [SongInfoSchema], default: [] }
+    },
   },
   createdAt: {
     type: Date,
