@@ -6,19 +6,18 @@ import { getTopLists } from "@/utils/topLists";
 import { useCtx } from "@/components/Context";
 
 const DashboardPage = () => {
-  const [top4Genres, setTop4] = useState([] as any)
-  const [top20Songs, setTop20] = useState([] as any)
+  const [top4Genres, setTop4] = useState(new Array(4).fill(null) as any)
+  const [top20Songs, setTop20] = useState(new Array(20).fill(null) as any)
   const [state] = useCtx() as any;
   const { music } = state;
 
   useEffect(() => {
     (async () => {
-      const { top4Genres, top20Songs } = await getTopLists(music);
-      await Promise.allSettled(top20Songs);
+      const { top4Genres, top20Songs } = getTopLists(music);
       console.log("TOP 4 GENRES", top4Genres)
       console.log("TOP 20 SONGS", top20Songs)
-      setTop4(top4Genres);
-      setTop20(top20Songs);
+      top4Genres.length && setTop4(top4Genres);
+      top20Songs.length && setTop20(top20Songs);
     })()
 
   }, [music])

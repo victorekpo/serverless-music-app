@@ -1,5 +1,5 @@
 {
-  "name": "serverless-data-machine",
+  "name": "serverless-music-app",
   "version": "1.0.0",
   "bin": {
     "index": "src/index.js"
