@@ -14,7 +14,7 @@ export const graphqlHandler = async (req) => {
     headers: {
       ...JsonHeader // important to declare the type of body
     },
-    ...(req.body && { body: parsedBody })
+    ...(req.body && { body: JSON.stringify(parsedBody) })
   }, 3);
 
   const res = data ? data : error;

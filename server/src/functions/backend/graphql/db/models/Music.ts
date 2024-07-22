@@ -1,12 +1,12 @@
 import { model, Schema, Document, models } from 'mongoose';
-import { SongInfo } from '@/@types/Music';
+// import { SongInfo } from '@/@types/Music';
 
-interface ISongStats extends Document {
-  views: number;
-  plays: number;
-  edits: number;
-  rating: number;
-}
+// interface ISongStats extends Document {
+//   views: number;
+//   plays: number;
+//   edits: number;
+//   rating: number;
+// }
 
 interface ISongInfo extends Document {
   artist: string;
@@ -18,7 +18,7 @@ interface ISongInfo extends Document {
   mood?: string;
   tags?: string;
   quotes?: string;
-  stats?: ISongStats
+  // stats?: ISongStats
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -30,14 +30,14 @@ interface ISongs extends Document {
   updatedAt?: Date;
 }
 
-interface ICollectionStats extends Document {
-  top4Genres: string[];
-  top20Songs: SongInfo[];
-}
+// interface ICollectionStats extends Document {
+//   top4Genres: string[];
+//   top20Songs: SongInfo[];
+// }
 
 interface IMusicCollection extends Document {
   songs: ISongs[];
-  stats: ICollectionStats;
+  // stats: ICollectionStats;
   user: Schema.Types.ObjectId;
   createdAt?: Date;
   updatedAt?: Date;
@@ -82,14 +82,14 @@ const SongInfoSchema: Schema<ISongInfo> = new Schema({
     type: String,
     trim: true,
   },
-  stats: {
-    type: {
-      views: { type: Number, default: 0 },
-      plays: { type: Number, default: 0 },
-      edits: { type: Number, default: 0 },
-      rating: { type: Number, default: 0 }
-    },
-  },
+  // stats: {
+  //   type: {
+  //     views: { type: Number, default: 0 },
+  //     plays: { type: Number, default: 0 },
+  //     edits: { type: Number, default: 0 },
+  //     rating: { type: Number, default: 0 }
+  //   },
+  // },
   createdAt: {
     type: Date,
     default: Date.now,
@@ -134,12 +134,12 @@ const MusicCollectionsSchema: Schema<IMusicCollection> = new Schema({
     ref: 'user',
     required: true,
   },
-  stats: {
-    type: {
-      top4Genres: { type: [String], default: [] },
-      top20Songs: { type: [SongInfoSchema], default: [] }
-    },
-  },
+  // stats: {
+  //   type: {
+  //     top4Genres: { type: [String], default: [] },
+  //     top20Songs: { type: [SongInfoSchema], default: [] }
+  //   },
+  // },
   createdAt: {
     type: Date,
     default: Date.now,

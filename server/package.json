@@ -9,7 +9,7 @@
   "scripts": {
     "build": "tsc",
     "bootstrap": "cdk bootstrap",
-    "deploy": "cdk deploy --all && npm run getUrl",
+    "deploy": "cdk deploy --all --require-approval never && npm run getUrl",
     "getUrl": "ts-node src/utils/getUrl.ts",
     "dev": "sh -c './develop.sh'",
     "destroy": "cdk destroy --all",
