@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "prepare": "husky",
-    "deploy": "npm run deploy-server && npm run deploy-client",
+    "deploy": "concurrently \"npm run deploy-server\" \"npm run deploy-client\"",
     "deploy-client": "cd client && npm run deploy",
     "deploy-server": "cd server && npm run deploy",
     "test": "npm run test-server",
