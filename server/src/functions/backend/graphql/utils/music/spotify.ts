@@ -2,16 +2,30 @@ import { fetchApi } from '@/fetch';
 import { updateMusic } from './update';
 // import { readSong } from '@/functions/backend/graphql/utils/music/read';
 
-export const getSpotifyInfo = async (song) => {
-  return await fetchApi(`https://spotify.teknixco.net/search/${song}`, {
+export const getSpotifyInfo = async (song, opts = {}) => {
+  const params = new URLSearchParams(opts);
+  console.log('Getting spotify info for', song);
+  const response = await fetchApi(`https://spotify.teknixco.net/search/${song}?${params.toString()}`, {
     headers: {
       apikey: process.env.API_KEY || ''
     }
   });
+
+  if (response.error) {
+    console.error('Error while getting spotify info', response);
+    return response.error;
+  }
+
+  return response;
 };
 
 export const enhanceWithSpotifyInfo = async (user, songId, song) => {
-  const spotifyInfo = await getSpotifyInfo(song);
+  let spotifyInfo;
+  spotifyInfo = await getSpotifyInfo(song);
+  if (!spotifyInfo.length) {
+    spotifyInfo = await getSpotifyInfo(song, { match: false });
+  }
+  console.log('spotify info', spotifyInfo);
 
   // const searchSong = await readSong(user, songId);
   // const { _doc: { songInfo: { _id, createdAt, updatedAt, _doc: { ...songInfo } } } } = searchSong;
@@ -25,7 +39,7 @@ export const enhanceWithSpotifyInfo = async (user, songId, song) => {
   };
   console.log('enhancedSpotifyInfo', JSON.stringify(enhancedSpotifyInfo));
 
-  await updateMusic(user, songId, enhancedSpotifyInfo);
+  return await updateMusic(user, songId, enhancedSpotifyInfo);
 };
 
 export const enhanceAllWithSpotify = async (allMusic, user) => {

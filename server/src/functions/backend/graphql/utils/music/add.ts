@@ -24,7 +24,7 @@ export const addMusic = async (user: string, newSongData: SongInfo): Promise<Son
     let spotifyInfo: any = null;
 
     try {
-      spotifyInfo = await getSpotifyInfo(songTrack.replaceAll('--', ''));
+      spotifyInfo = await getSpotifyInfo(songTrack.replaceAll('-- ', '').replaceAll('--', ''));
     } catch (err) {
       console.error('Error occurred while adding Spotify Info to new track', err);
     }

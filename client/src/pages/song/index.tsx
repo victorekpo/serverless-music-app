@@ -42,7 +42,7 @@ const SongPage = () => {
       });
       return s;
     }
-    // console.log("SONG ID", songId, songTrack);
+    console.log("SongId", songId, songTrack);
   }, [music, songTrack]);
 
   const [song, setSong] = useState(found);

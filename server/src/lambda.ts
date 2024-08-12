@@ -20,7 +20,8 @@ export const createLambdaFunctions = (scope: Construct, createFn: any, layers: L
     id: 'graphqlHandler',
     handler: join('backend', 'graphql', 'index.ts'),
     environment: {
-      MONGODB_URI: process.env.MONGODB_URI
+      MONGODB_URI: process.env.MONGODB_URI,
+      API_KEY: process.env.API_KEY
     }
   });
 
