@@ -42,7 +42,7 @@ const SongPage = () => {
       });
       return s;
     }
-    console.log("SONG ID", songId, songTrack);
+    // console.log("SONG ID", songId, songTrack);
   }, [music, songTrack]);
 
   const [song, setSong] = useState(found);
@@ -91,12 +91,23 @@ const SongPage = () => {
       toast.error("Error updating song");
     }
   };
+  console.log("SONG", song)
 
   return (
     <>
       <h1 className='song-songHeading'>
         {song?.song}
       </h1>
+      {song?.songInfo?.spotify && (
+        <div>
+          <img style={{ height: "350px" }} src={song.songInfo.spotify.album.image} alt=""/>
+          <a href={song.songInfo.spotify.link}>Play on Spotify
+            <img
+              src="https://developer.spotify.com/images/guidelines/design/icon3@2x.png" alt="Play on Spotify"
+              style={{ height: "75px" }}/>
+          </a>
+        </div>
+      )}
       <br/>
       <form
         className={"song-formContainer" + " " + (edit ? "song-editable" + " flex w-full flex-wrap md:flex-nowrap gap-2 sm:gap-4" : "")}
