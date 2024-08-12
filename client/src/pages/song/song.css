@@ -1,0 +1,51 @@
+.song-songHeading {
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.song-formContainer {
+    font-size: 20px;
+    max-width: 90%;
+}
+
+.song-fields {
+    font-weight: 600;
+}
+
+.song-editable {
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.song-editable input {
+    width: 330px;
+    font-weight: bold;
+}
+
+.song-formContainer input {
+
+}
+
+.song-formContainer div {
+    margin-bottom: 2px
+}
+
+.song-buttonContainer {
+    display: flex;
+    width: 205px;
+    justify-content: space-between;
+}
+
+.song-formContainer button {
+    margin-top: 15px
+}
+
+@media (max-width: 640px) {
+    .song-songHeading {
+        font-size: 20px;
+    }
+
+    .song-formContainer {
+        font-size: 16px;
+    }
+}

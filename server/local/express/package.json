@@ -1,0 +1,23 @@
+{
+  "name": "local-express",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --watch ../../src --watch server.ts --exec \"ts-node -r tsconfig-paths/register --project ../../tsconfig.json\" server.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/server": "^4.11.0",
+    "express": "^4.19.2",
+    "mongoose": "^8.5.2",
+    "tsconfig-paths": "^4.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
+  }
+}
