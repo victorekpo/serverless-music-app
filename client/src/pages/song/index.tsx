@@ -113,7 +113,7 @@ const SongPage = () => {
         className={"song-formContainer" + " " + (edit ? "song-editable" + " flex w-full flex-wrap md:flex-nowrap gap-2 sm:gap-4" : "")}
         onSubmit={handleSubmit}
       >
-        {Object.entries(song?.songInfo || {}).map(([k, v], i) => (
+        {Object.entries(song?.songInfo || {}).map(([k, v]: any, i) => (
           <div key={i}>
             {edit ? (
               <>
@@ -130,9 +130,24 @@ const SongPage = () => {
                 />
               </>
             ) : (
-              <>
-                <span className="song-fields">{k}:</span> {typeof (v) === 'object' ? JSON.stringify(v) : v} <br/>
-              </>
+              k !== 'spotify' ? (
+                <>
+                  <span className="song-fields">{k}:</span> {typeof (v) === 'object' ? JSON.stringify(v) : v} <br/>
+                </>
+              ) : (
+                <>
+                  {!!v ? (
+                    <>
+                      <span className="song-fields">duration: </span>
+                      <span>{v.duration}</span>
+                      <br/>
+                      <span className="song-fields">released: </span>
+                      <span>{v.album.released}</span>
+                      <br/>
+                    </>
+                  ) : 'No Spotify Info found'}
+                </>
+              )
             )
             }
           </div>
