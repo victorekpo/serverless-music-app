@@ -3,7 +3,10 @@ import { updateMusic } from './update';
 // import { readSong } from '@/functions/backend/graphql/utils/music/read';
 
 export const getSpotifyInfo = async (song, opts = {}) => {
-  const params = new URLSearchParams(opts);
+  const params = new URLSearchParams({
+    limit: '50',
+    ...opts
+  });
   console.log('Getting spotify info for', song);
 
   let response: any;
@@ -16,6 +19,7 @@ export const getSpotifyInfo = async (song, opts = {}) => {
   if (!response?.data?.length) {
     console.log('No data found, retrying without match');
     response = await fetchApi(`https://spotify.teknixco.net/search/${song}?${new URLSearchParams({
+      limit: '50',
       ...opts,
       match: 'false'
     }).toString()}`, {
