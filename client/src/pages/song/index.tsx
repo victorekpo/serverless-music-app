@@ -33,7 +33,7 @@ const SongPage = () => {
 
   const found = useMemo(() => {
     const ignoredKeys = ['__typename'];
-    const f = music?.songs.find((s: Song) => s.song === songTrack)
+    const f = music?.songs.find((s: Song) => s.song.toLowerCase() === songTrack.toLowerCase())
 
     if (f) {
       const s = { ...f, songInfo: { ...f.songInfo } };

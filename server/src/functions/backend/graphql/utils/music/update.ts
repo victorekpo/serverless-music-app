@@ -2,7 +2,6 @@ import { MusicCollections } from '@/functions/backend/graphql/db/models/Music';
 import type { MusicCollection, Song, SongInfo } from '@/@types/Music';
 
 export const updateMusic = async (user: string, id: string, updatedSongInfo: Partial<SongInfo>): Promise<Song | null> => {
-  console.log('ID', id);
   const songId = id;
   try {
     // Step 1. Get specific fields to update
@@ -17,7 +16,16 @@ export const updateMusic = async (user: string, id: string, updatedSongInfo: Par
       { $set: updateFields }
     );
 
-    // Step 3: Retrieve the updated song info
+    // Step 3. Update the `song` property based on the updated `songInfo`
+    if (updatedSongInfo.artist || updatedSongInfo.song) {
+      const newSong = `${updatedSongInfo.artist || ''} -- ${updatedSongInfo.song || ''}`.trim();
+      await MusicCollections.findOneAndUpdate(
+        { user, 'songs._id': songId },
+        { $set: { 'songs.$.song': newSong } }
+      );
+    }
+
+    // Step 4: Retrieve the updated song info
     const musicCollection: MusicCollection | null = await MusicCollections.findOne(
       { user, 'songs._id': songId },
       { 'songs.$': 1 }
