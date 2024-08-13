@@ -24,25 +24,26 @@ const initialState = {
 };
 
 export const AppContextProvider = ({ children }: any) => {
-  const cached = localStorage.getItem(MUSIC_LOCAL_STORAGE_KEY);
+  // const cached = localStorage.getItem(MUSIC_LOCAL_STORAGE_KEY);
 
   const [state, dispatch] = useReducer(reducer, { ...initialState });
 
   const { data: musicData } = useQuery(GET_ALL_MUSIC_QUERY, {
     variables: { user },
-    skip: !!cached && !!state.music, // Skip query if cached data is available and state has music
+    // no benefit to using cache right now
+    // skip: !!cached && !!state.music, // Skip query if cached data is available and state has music
     fetchPolicy: 'network-only' // Always fetch from the network, ignoring the cache
   });
 
-  useEffect(() => {
-    if (cached && !state.music) {
-      console.log("Using Cached Music")
-      dispatch({
-        type: SET_ALL_MUSIC,
-        payload: JSON.parse(cached).getAllMusic
-      });
-    }
-  }, [cached]);
+  // useEffect(() => {
+  //   if (cached && !state.music) {
+  //     console.log("Using Cached Music")
+  //     dispatch({
+  //       type: SET_ALL_MUSIC,
+  //       payload: JSON.parse(cached).getAllMusic
+  //     });
+  //   }
+  // }, [cached]);
 
   useEffect(() => {
     if (musicData) {
@@ -50,7 +51,8 @@ export const AppContextProvider = ({ children }: any) => {
         type: SET_ALL_MUSIC,
         payload: musicData.getAllMusic
       });
-      localStorage.setItem(MUSIC_LOCAL_STORAGE_KEY, JSON.stringify(musicData));
+      // console.log("Setting music data to cache");
+      // localStorage.setItem(MUSIC_LOCAL_STORAGE_KEY, JSON.stringify(musicData));
     }
   }, [musicData]);
 

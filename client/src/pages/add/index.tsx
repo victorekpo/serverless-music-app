@@ -25,7 +25,7 @@ const AddMusicPage = () => {
   const { user } = state;
 
   const [formState, setFormState] = useState(initialFormState);
-  const [clear, setClear] = useState(false);
+  // const [clear, setClear] = useState(false);
 
   const [addMusic, { error }] = useMutation(ADD_MUSIC_QUERY, {
     refetchQueries: [
@@ -34,13 +34,13 @@ const AddMusicPage = () => {
     ]
   });
 
-  useEffect(() => {
-    // Delete local storage to force a refresh
-    if (clear) {
-      window.localStorage.clear()
-      window.location.reload()
-    }
-  }, [clear])
+  // useEffect(() => {
+  //   // Delete local storage to force a refresh
+  //   if (clear) {
+  //     window.localStorage.clear()
+  //     window.location.reload()
+  //   }
+  // }, [clear])
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -61,7 +61,7 @@ const AddMusicPage = () => {
         type: ADD_SONG,
         payload: { ...formState }
       });
-      setClear(true);
+      // setClear(true);
     } else {
       toast.error("Error adding new music.")
     }

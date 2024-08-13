@@ -85,8 +85,8 @@ const SongPage = () => {
         song: `${formState.artist} -- ${formState.song}`,
         songInfo: { ...formState }
       });
-      // Delete local storage to force a refresh
-      localStorage.removeItem('musicData');
+      // // Delete local storage to force a refresh
+      // localStorage.removeItem('musicData');
     } else {
       toast.error("Error updating song");
     }
