@@ -55,7 +55,9 @@ const SongPage = () => {
 
   useEffect(() => {
     if (song?.songInfo) {
-      setFormState(song.songInfo);
+      const songInfoWithoutSpotify = { ...song.songInfo };
+      delete songInfoWithoutSpotify.spotify;
+      setFormState(songInfoWithoutSpotify);
     }
   }, [song]);
 
@@ -113,45 +115,48 @@ const SongPage = () => {
         className={"song-formContainer" + " " + (edit ? "song-editable" + " flex w-full flex-wrap md:flex-nowrap gap-2 sm:gap-4" : "")}
         onSubmit={handleSubmit}
       >
-        {Object.entries(song?.songInfo || {}).map(([k, v]: any, i) => (
-          <div key={i}>
-            {edit ? (
-              <>
-                <Input
-                  type={k}
-                  label={k}
-                  value={formState[k]}
-                  onChange={({ target: { value } }) => {
-                    setFormState((prev: any) => ({
-                      ...prev,
-                      [k]: value
-                    }));
-                  }}
-                />
-              </>
-            ) : (
-              k !== 'spotify' ? (
-                <>
-                  <span className="song-fields">{k}:</span> {typeof (v) === 'object' ? JSON.stringify(v) : v} <br/>
-                </>
-              ) : (
-                <>
-                  {!!v ? (
+        {Object.entries(song?.songInfo || {}).map(([k, v]: any, i) => {
+            return (
+              <div key={i}>
+                {(edit && k !== 'spotify') ? (
+                  <>
+                    <Input
+                      type={k}
+                      label={k}
+                      value={formState[k]}
+                      onChange={({ target: { value } }) => {
+                        setFormState((prev: any) => ({
+                          ...prev,
+                          [k]: value
+                        }));
+                      }}
+                    />
+                  </>
+                ) : (
+                  k !== 'spotify' ? (
                     <>
-                      <span className="song-fields">duration: </span>
-                      <span>{v.duration}</span>
-                      <br/>
-                      <span className="song-fields">released: </span>
-                      <span>{v.album.released}</span>
-                      <br/>
+                      <span className="song-fields">{k}:</span> {typeof (v) === 'object' ? JSON.stringify(v) : v} <br/>
                     </>
-                  ) : 'No Spotify Info found'}
-                </>
-              )
+                  ) : (
+                    <>
+                      {!!v ? (
+                        <>
+                          <span className="song-fields">duration: </span>
+                          <span>{v.duration}</span>
+                          <br/>
+                          <span className="song-fields">released: </span>
+                          <span>{v.album.released}</span>
+                          <br/>
+                        </>
+                      ) : 'No Spotify Info found'}
+                    </>
+                  )
+                )
+                }
+              </div>
             )
-            }
-          </div>
-        ))}
+          }
+        )}
         {edit ? (
           <div style={{ width: "100%" }}>
             <div className="song-buttonContainer">

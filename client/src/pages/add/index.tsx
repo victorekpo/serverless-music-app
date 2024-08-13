@@ -45,6 +45,7 @@ const AddMusicPage = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Mutation query to add song in db
+    console.log("FORM STATE", formState)
     await addMusic({
       variables: {
         song: { ...formState },

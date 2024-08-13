@@ -30,7 +30,7 @@ export const addMusic = async (user: string, newSongData: SongInfo): Promise<Son
     }
     const newSong = <Song>{
       song: songTrack,
-      songInfo: { ...newSongData, spotify: spotifyInfo.data[0] }
+      songInfo: { ...newSongData, spotify: spotifyInfo?.data?.[0] || null }
     };
     musicCollection.songs.push(newSong);
 

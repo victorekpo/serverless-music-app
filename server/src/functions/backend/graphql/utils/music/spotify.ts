@@ -5,11 +5,29 @@ import { updateMusic } from './update';
 export const getSpotifyInfo = async (song, opts = {}) => {
   const params = new URLSearchParams(opts);
   console.log('Getting spotify info for', song);
-  const response = await fetchApi(`https://spotify.teknixco.net/search/${song}?${params.toString()}`, {
+
+  let response: any;
+  response = await fetchApi(`https://spotify.teknixco.net/search/${song}?${params.toString()}`, {
     headers: {
       apikey: process.env.API_KEY || ''
     }
   });
+
+  if (!response?.data?.length) {
+    console.log('No data found, retrying without match');
+    response = await fetchApi(`https://spotify.teknixco.net/search/${song}?${new URLSearchParams({
+      ...opts,
+      match: 'false'
+    }).toString()}`, {
+      headers: {
+        apikey: process.env.API_KEY || ''
+      }
+    });
+  }
+
+  if (!(song.includes(response?.data?.[0]?.song) || response?.data?.[0]?.song?.includes(song))) {
+    return null;
+  }
 
   if (response.error) {
     console.error('Error while getting spotify info', response);
@@ -20,11 +38,7 @@ export const getSpotifyInfo = async (song, opts = {}) => {
 };
 
 export const enhanceWithSpotifyInfo = async (user, songId, song) => {
-  let spotifyInfo;
-  spotifyInfo = await getSpotifyInfo(song);
-  if (!spotifyInfo.length) {
-    spotifyInfo = await getSpotifyInfo(song, { match: false });
-  }
+  const spotifyInfo = await getSpotifyInfo(song);
   console.log('spotify info', spotifyInfo);
 
   // const searchSong = await readSong(user, songId);
@@ -35,7 +49,7 @@ export const enhanceWithSpotifyInfo = async (user, songId, song) => {
 
   const enhancedSpotifyInfo = {
     // ...songInfo,
-    spotify: spotifyInfo.data[0]
+    spotify: spotifyInfo?.data?.[0] || null
   };
   console.log('enhancedSpotifyInfo', JSON.stringify(enhancedSpotifyInfo));
 
