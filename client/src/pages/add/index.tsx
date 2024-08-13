@@ -45,15 +45,13 @@ const AddMusicPage = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Mutation query to add song in db
-    console.log("FORM STATE", formState)
-    await addMusic({
-      variables: {
-        song: { ...formState },
-        user
-      }
-    });
-
-    if (!error) {
+    try {
+      await addMusic({
+        variables: {
+          song: { ...formState },
+          user
+        }
+      });
       // Send toast notification
       toast.success("New music added successfully.");
 
@@ -62,9 +60,9 @@ const AddMusicPage = () => {
         type: ADD_SONG,
         payload: { ...formState }
       });
-      // setClear(true);
-    } else {
-      toast.error("Error adding new music.")
+    } catch (err: any) {
+      console.log("error1s", err)
+      toast.error(err.message)
     }
   }
 
