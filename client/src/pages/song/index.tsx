@@ -2,14 +2,16 @@ import { Button, Input } from "@nextui-org/react";
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useCtx } from "@/components/Context";
-import { useMutation } from "@apollo/client";
-import { UPDATE_SONG } from "@/components/Context/actions";
+import { useLazyQuery, useMutation } from "@apollo/client";
+import { SET_SEARCH_RESULTS, UPDATE_SONG } from "@/components/Context/actions";
 import { UPDATE_MUSIC_QUERY } from "@/graphql/queries/updateMusic";
 import toast from "react-hot-toast";
 import { Song } from "@/@types/Music";
 import './song.css';
 import { Twitter } from "@/components/Cards/Twitter";
-import { fetchApi } from "@/fetch";
+import { debounce } from "@/utils/debounce";
+import { SEARCH_SPOTIFY_QUERY } from "@/graphql/queries/searchSpotify";
+
 
 const SongPage = () => {
   const { songId } = useParams();
@@ -18,6 +20,19 @@ const SongPage = () => {
   const { user, music } = state;
   const [edit, setEdit] = useState(false);
   const [formState, setFormState] = useState({}) as any;
+  const [searchSpotify, { loading, error: spotifyError }] = useLazyQuery(SEARCH_SPOTIFY_QUERY);
+  const debouncedSpotifySearch = useMemo(() =>
+      debounce(async (value) => {
+        console.log("Spotify searching for ...", value)
+        const { data } = await searchSpotify({ variables: { spotifyQuery: value } });
+        console.log("Data from spotify", data);
+      }, 1000),
+    [searchSpotify, dispatch]
+  );
+
+  const handleSpotifySearch = (value) => {
+    debouncedSpotifySearch(value)
+  }
 
   // Type-check and handle undefined songId
   const validSongId = typeof songId === 'string' ? songId : '';
@@ -112,7 +127,7 @@ const SongPage = () => {
       )}
       <br/>
       <form
-        className={"song-formContainer" + " " + (edit ? "song-editable" + " flex w-full flex-wrap md:flex-nowrap gap-2 sm:gap-4" : "")}
+        className={"song-formContainer" + " " + (edit ? "song-editable" + " flex w-full flex-wrap md:flex-wrap gap-2 sm:gap-4" : "")}
         onSubmit={handleSubmit}
       >
         {Object.entries(song?.songInfo || {}).map(([k, v]: any, i) => {
@@ -148,7 +163,7 @@ const SongPage = () => {
                           <span>{v.album.released}</span>
                           <br/>
                         </>
-                      ) : 'No Spotify Info found'}
+                      ) : ''}
                     </>
                   )
                 )
@@ -157,6 +172,9 @@ const SongPage = () => {
             )
           }
         )}
+        {
+
+        }
         {edit ? (
           <div style={{ width: "100%" }}>
             <div className="song-buttonContainer">
@@ -192,8 +210,18 @@ const SongPage = () => {
           </Button>
         )}
       </form>
+      {edit && (
+        <div style={{ width: "400px" }}>
+          <hr/>
+          <span>Search for Spotify Info</span>
+          <Input
+            type="SpotifySearch"
+            label="Spotify Search"
+            onChange={({ target: { value } }) => handleSpotifySearch(value)}
+          />
+        </div>)}
       <hr/>
-      <Twitter/>
+      {/*<Twitter/>*/}
     </>
   )
 }

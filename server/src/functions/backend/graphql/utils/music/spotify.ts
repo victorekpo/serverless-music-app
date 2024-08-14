@@ -15,6 +15,7 @@ export const getSpotifyInfo = async (song, opts = {}) => {
       apikey: process.env.API_KEY || ''
     }
   });
+  console.log('GET response', response);
 
   if (!response?.data?.length) {
     console.log('No data found, retrying without match');
@@ -29,9 +30,9 @@ export const getSpotifyInfo = async (song, opts = {}) => {
     });
   }
 
-  if (!(song.includes(response?.data?.[0]?.song) || response?.data?.[0]?.song?.includes(song))) {
-    return null;
-  }
+  // if (!(song.includes(response?.data?.[0]?.song) || response?.data?.[0]?.song?.includes(song))) {
+  //   return null;
+  // }
 
   if (response.error) {
     console.error('Error while getting spotify info', response);

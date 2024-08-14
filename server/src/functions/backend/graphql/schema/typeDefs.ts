@@ -74,6 +74,7 @@ export const typeDefs = `
     getAllMusic(user: String!): MusicCollection
     getSong(song: String!): Song
     searchMusic(songQuery: String, artistQuery: String, albumQuery: String, genreQuery: String, tagsQuery: String, quotesQuery: String): [Song]
+    searchSpotify(spotifyQuery: String): [SpotifyInfo]
   }
   
   type Mutation {

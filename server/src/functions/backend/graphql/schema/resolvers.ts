@@ -2,7 +2,7 @@ import { readMusic } from '@/functions/backend/graphql/utils/music/read';
 import { searchQuery } from '@/functions/backend/graphql/utils/music';
 import { addMusic } from '@/functions/backend/graphql/utils/music/add';
 import { updateMusic } from '@/functions/backend/graphql/utils/music/update';
-import { enhanceWithSpotifyInfo } from '@/functions/backend/graphql/utils/music/spotify';
+import { enhanceWithSpotifyInfo, getSpotifyInfo } from '@/functions/backend/graphql/utils/music/spotify';
 import type { MusicCollection, Song } from '@/@types/Music';
 import type { SearchQuery } from '@/@types/SearchQuery';
 
@@ -43,6 +43,12 @@ export const resolvers = {
         tagsQuery,
         quotesQuery
       });
+    },
+
+    searchSpotify: async (_, { spotifyQuery }) => {
+      console.log('Spotify Query', spotifyQuery);
+      const response = await getSpotifyInfo(spotifyQuery);
+      return response.data;
     }
   },
 
