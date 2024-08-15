@@ -1,4 +1,4 @@
-import { Button, Input } from "@nextui-org/react";
+import { Button, Input, Listbox, ListboxItem } from "@nextui-org/react";
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useCtx } from "@/components/Context";
@@ -20,12 +20,14 @@ const SongPage = () => {
   const { user, music } = state;
   const [edit, setEdit] = useState(false);
   const [formState, setFormState] = useState({}) as any;
+  const [spotifyResults, setSpotifyResults] = useState(null) as any;
   const [searchSpotify, { loading, error: spotifyError }] = useLazyQuery(SEARCH_SPOTIFY_QUERY);
   const debouncedSpotifySearch = useMemo(() =>
       debounce(async (value) => {
         console.log("Spotify searching for ...", value)
         const { data } = await searchSpotify({ variables: { spotifyQuery: value } });
         console.log("Data from spotify", data);
+        setSpotifyResults(data.searchSpotify);
       }, 1000),
     [searchSpotify, dispatch]
   );
@@ -219,6 +221,27 @@ const SongPage = () => {
             label="Spotify Search"
             onChange={({ target: { value } }) => handleSpotifySearch(value)}
           />
+          <Listbox
+            aria-label="Actions"
+            onAction={(key) => console.log(key)}
+          >
+            {spotifyResults?.map((result, i) => (
+              <ListboxItem key={i}>
+                <span style={{ whiteSpace: "break-spaces" }}>
+                  <div style={{ display: "flex", gap: 20, justifyContent: "space-between" }}>
+                    <div>
+                      {result.artist.join(", ")} <br/>
+                      {result.song} <br/>
+                      Album: {result.album.name}
+                    </div>
+                    <div>
+                      <img src={result.album.image} style={{ height: "75px" }}/>
+                    </div>
+                  </div>
+                </span>
+              </ListboxItem>
+            ))}
+          </Listbox>
         </div>)}
       <hr/>
       {/*<Twitter/>*/}
