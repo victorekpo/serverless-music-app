@@ -22,6 +22,7 @@ const SongPage = () => {
   const [formState, setFormState] = useState({}) as any;
   const [spotifyResults, setSpotifyResults] = useState(null) as any;
   const [searchSpotify, { loading, error: spotifyError }] = useLazyQuery(SEARCH_SPOTIFY_QUERY);
+  const [updateSong, { error }] = useMutation(UPDATE_MUSIC_QUERY);
   const debouncedSpotifySearch = useMemo(() =>
       debounce(async (value) => {
         console.log("Spotify searching for ...", value)
@@ -34,6 +35,47 @@ const SongPage = () => {
 
   const handleSpotifySearch = (value) => {
     debouncedSpotifySearch(value)
+  }
+
+  const handleUpdateSpotifyInfo = async (spotifyInfoString) => {
+    const parsedSpotifyInfo = JSON.parse(spotifyInfoString);
+    const spotify = {
+      duration: parsedSpotifyInfo.duration,
+      link: parsedSpotifyInfo.link,
+      song: parsedSpotifyInfo.song,
+      popularity: parsedSpotifyInfo.popularity,
+      album: {
+        image: parsedSpotifyInfo.album.image,
+        name: parsedSpotifyInfo.album.name,
+        released: parsedSpotifyInfo.album.released,
+        totalTracks: parsedSpotifyInfo.album.totalTracks
+      }
+    }
+    // Mutation query to update song in db
+    await updateSong({
+      variables: {
+        user,
+        oldSongId: song._id,
+        song: { spotify }
+      }
+    });
+
+    if (!error) {
+      toast.success("Song updated successfully with new Spotify Info");
+      // Dispatch to update global state music object
+      dispatch({
+        type: UPDATE_SONG,
+        payload: { songId: song._id, ...formState, spotify }
+      });
+      // Set new song to local state for current page
+      setSong({
+        _id: song._id,
+        song: `${formState.artist} -- ${formState.song}`,
+        songInfo: { ...formState, spotify }
+      });
+    } else {
+      toast.error("Error updating song with new Spotify Info");
+    }
   }
 
   // Type-check and handle undefined songId
@@ -67,6 +109,7 @@ const SongPage = () => {
   useEffect(() => {
     if (found && !song) {
       setSong(found);
+      console.log("SONG", song)
     }
   }, [song, found]);
 
@@ -78,7 +121,6 @@ const SongPage = () => {
     }
   }, [song]);
 
-  const [updateSong, { error }] = useMutation(UPDATE_MUSIC_QUERY);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -110,7 +152,6 @@ const SongPage = () => {
       toast.error("Error updating song");
     }
   };
-  console.log("SONG", song)
 
   return (
     <>
@@ -223,10 +264,10 @@ const SongPage = () => {
           />
           <Listbox
             aria-label="Actions"
-            onAction={(key) => console.log(key)}
+            onAction={(info) => handleUpdateSpotifyInfo(info)}
           >
             {spotifyResults?.map((result, i) => (
-              <ListboxItem key={i}>
+              <ListboxItem key={JSON.stringify(result)}>
                 <span style={{ whiteSpace: "break-spaces" }}>
                   <div style={{ display: "flex", gap: 20, justifyContent: "space-between" }}>
                     <div>
