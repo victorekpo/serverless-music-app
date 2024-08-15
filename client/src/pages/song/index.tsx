@@ -73,6 +73,7 @@ const SongPage = () => {
         song: `${formState.artist} -- ${formState.song}`,
         songInfo: { ...formState, spotify }
       });
+      setEdit(false)
     } else {
       toast.error("Error updating song with new Spotify Info");
     }
