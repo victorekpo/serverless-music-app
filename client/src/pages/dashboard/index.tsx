@@ -36,17 +36,22 @@ const DashboardPage = () => {
         ))}
       </div>
 
-      <hr/>
 
-      <div className='db-top-songs'>
-        {songs.map((item, i) => (
-          <section key={i}>
-            <Theme2Card
-              item={item}
-            />
-          </section>
-        ))}
-      </div>
+      {[...songs].reverse().map((item, i) => (
+        <div key={i}>
+          <hr/>
+          <div className='db-top-songs'>
+            {item?.songs?.map((song, j) => (
+              <section>
+                <Theme2Card
+                  item={song}
+                />
+              </section>
+            ))}
+
+          </div>
+        </div>
+      ))}
 
       <hr/>
     </>

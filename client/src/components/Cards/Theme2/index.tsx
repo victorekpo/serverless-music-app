@@ -8,16 +8,16 @@ export const Theme2Card = ({ item }) => {
       className="border-none"
     >
       <Image
-        alt={item?.songs?.[0]?.songInfo?.quotes}
+        alt={item?.songInfo?.quotes}
         className="object-cover"
         height={200}
-        src={item?.songs?.[0]?.songInfo?.spotify?.album?.image}
+        src={item?.songInfo?.spotify?.album?.image}
         width={200}
       />
       <CardFooter
         className="justify-between before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large bottom-1 w-[calc(100%_-_8px)] shadow-small ml-1 z-10">
         <p
-          className="text-tiny text-white/80">{item?.songs?.[0]?.songInfo?.artist || 'Artist'} - {item?.songs?.[0]?.songInfo?.song || 'Song'}</p>
+          className="text-tiny text-white/80">{item?.songInfo?.artist || 'Artist'} - {item?.songInfo?.song || 'Song'}</p>
       </CardFooter>
     </Card>
   );
