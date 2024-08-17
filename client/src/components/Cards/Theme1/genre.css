@@ -1,0 +1,5 @@
+@media (max-width: 640px) {
+    .genre-title {
+        font-size: 12px !important;
+    }
+}

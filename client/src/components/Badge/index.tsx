@@ -7,7 +7,7 @@ export const ProfileBadge = () => {
         <Avatar
           isBordered
           radius="full"
-          src="https://i.pravatar.cc/150?u=a04258a2462d826712d"
+          src="https://lh3.googleusercontent.com/a/ACg8ocJ0FVfCCUUy9FkXebellLeN2W49yjrA5zSMkn0VOYWrCqpPQwYnHw=s288-c-no"
         />
       </Badge>
     </div>
