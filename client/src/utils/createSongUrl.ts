@@ -1,0 +1,1 @@
+export const createSongUrl = (song) => `/song/${song.replace(" -- ", "--").replaceAll(" ", "_")}`

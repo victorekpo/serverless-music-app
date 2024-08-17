@@ -14,6 +14,7 @@ import { debounce } from "@/utils/debounce";
 import { FormEvent, useMemo, useEffect } from "react";
 import './search.css';
 import { useNavigate } from "react-router";
+import { createSongUrl } from "@/utils/createSongUrl";
 
 export const dynamic = "force-dynamic";
 
@@ -128,7 +129,7 @@ const SearchPage = () => {
             onAction={(key) => navigate(key as string)}
           >
             {searchResults?.map((result) => (
-              <ListboxItem key={`/song/${result.song.replace(" -- ", "--").replaceAll(" ", "_")}`}>
+              <ListboxItem key={createSongUrl(result.song)}>
                 {result.song}
               </ListboxItem>
             ))}
