@@ -4,7 +4,7 @@
     font-size: 14px;
 }
 
-.db-top-4-genres {
+.db-top-genres {
     display: flex;
     gap: 80px 0;
     align-items: center;
@@ -13,11 +13,11 @@
     margin-bottom: 50px;
 }
 
-.db-top-4-genres section {
+.db-top-genres section {
     flex: 0 0 300px;
 }
 
-.db-top-20-songs {
+.db-top-songs {
     display: flex;
     gap: 40px 40px;
     align-items: center;
@@ -27,22 +27,22 @@
     margin-Bottom: 50px;
 }
 
-.db-top-20-songs section {
+.db-top-songs section {
     flex: 0 0 150px;
 }
 
 @media (max-width: 1536px) {
-    .db-top-4-genres {
+    .db-top-genres {
         gap: 40px 10px;
     }
 
-    .db-top-4-genres section {
+    .db-top-genres section {
         flex: 0 0 250px;
     }
 }
 
 @media (max-width: 1024px) {
-    .db-top-4-genres {
+    .db-top-genres {
         gap: 40px 10px;
     }
 
@@ -52,22 +52,22 @@
 }
 
 @media (max-width: 640px) {
-    .db-top-4-genres {
+    .db-top-genres {
         gap: 20px 0;
         margin-bottom: 30px;
     }
 
-    .db-top-4-genres section {
+    .db-top-genres section {
         flex: 0 0 180px;
     }
 
-    .db-top-20-songs {
+    .db-top-songs {
         gap: 20px 20px;
         margin-top: 30px;
         margin-bottom: 30px;
     }
 
-    .db-top-20-songs section {
+    .db-top-songs section {
         flex: 0 0 120px;
     }
 }

@@ -1,22 +1,35 @@
+import { shuffleArr } from "@/utils/shuffle";
+import { MAX_GENRES, MAX_SONGS } from "@/constants";
+
 export const getTopLists = (music) => {
 
   if (!music) {
     console.log("Music not ready or not found")
     return {
-      top4Genres: [],
-      top20Songs: []
+      topSongs: []
     };
   }
 
 // Function to count genre occurrences
   const countGenres = (songs) => {
     const genreCounts = {};
-    for (const song of songs) {
+    for (const song of shuffleArr(songs)) {
       const genre = song.songInfo.genre;
       if (!genre) {
         continue;
       }
-      genreCounts[genre] = (genreCounts[genre] || 0) + 1;
+      if (!genreCounts[genre]) {
+        genreCounts[genre] = {}
+      }
+      genreCounts[genre].count = (genreCounts[genre].count || 0) + 1;
+
+      if (!genreCounts[genre].songs) {
+        genreCounts[genre].songs = []
+      }
+      if (!(genreCounts[genre].songs.length > MAX_SONGS) && !!song.songInfo.spotify) {
+        genreCounts[genre].songs.push(song)
+      }
+
     }
     return genreCounts;
   };
@@ -24,17 +37,13 @@ export const getTopLists = (music) => {
 // Get genre counts and sort by count (descending)
   const genreCounts = countGenres(music.songs);
   const sortedGenres = Object.entries(genreCounts)
-    .sort((a: any, b: any) => b[1] - a[1]) // Sort by count descending
-    .slice(0, 4); // Get top 4
+    .sort((a: any, b: any) => b[1].count - a[1].count) // Sort by count descending
+    .slice(0, MAX_GENRES);
 
-// Extract top genres
-  const top4Genres = sortedGenres.map(([genre]) => genre);
-
-// Get top 20 songs
-  const top20Songs = music.songs.filter((song => !!song.songInfo.spotify)).slice(0, 20);
+// Return top genres and songs
+  const topSongs = sortedGenres.map(([genre, value]: any) => ({ genre, ...value }));
 
   return {
-    top4Genres,
-    top20Songs
+    topSongs
   }
 };
