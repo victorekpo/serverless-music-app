@@ -1,5 +1,5 @@
 import { NextUIProvider } from "@nextui-org/react";
-import { Outlet } from 'react-router-dom';
+import { Outlet, ScrollRestoration } from 'react-router-dom';
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Toaster } from "react-hot-toast";
@@ -33,6 +33,7 @@ const App = () => {
       <div className="footer-container">
         <Footer/>
       </div>
+      <ScrollRestoration/>
     </>
   );
 };
