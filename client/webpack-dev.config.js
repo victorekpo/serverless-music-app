@@ -20,8 +20,8 @@ module.exports = {
       devServer.app.use(
         '/graphql', // The endpoint you want to proxy
         createProxyMiddleware({
-          target: 'http://localhost:3001/graphql', // Your Local GraphQL server address
-          // target: `${ process.env.API_URL }/graphql`, // Your Remote GraphQL server address
+          //target: 'http://localhost:3001/graphql', // Your Local GraphQL server address
+          target: `${ process.env.API_URL }/graphql`, // Your Remote GraphQL server address
           changeOrigin: true,
           pathRewrite: { '^/graphql': '' }
         })

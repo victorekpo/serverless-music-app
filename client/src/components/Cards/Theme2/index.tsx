@@ -1,13 +1,21 @@
 import { Card, CardFooter, Image, Button } from "@nextui-org/react";
 import { createSongUrl } from "@/utils/createSongUrl";
+import { useNavigate } from "react-router-dom";
 
 export const Theme2Card = ({ item }) => {
+  const navigate = useNavigate();
   return (
-    <a href={createSongUrl(item?.song)}>
+    <div
+      onClick={() => {
+        navigate(createSongUrl(item?.song))
+      }}
+      style={{ cursor: "pointer" }}
+    >
       <Card
         isFooterBlurred
         radius="lg"
         className="border-none"
+
       >
         <Image
           alt={item?.songInfo?.quotes}
@@ -22,6 +30,6 @@ export const Theme2Card = ({ item }) => {
             className="text-tiny text-white/80">{item?.songInfo?.artist || 'Artist'} - {item?.songInfo?.song || 'Song'}</p>
         </CardFooter>
       </Card>
-    </a>
+    </div>
   );
 }

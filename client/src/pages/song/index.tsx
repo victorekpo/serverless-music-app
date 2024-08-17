@@ -141,13 +141,13 @@ const SongPage = () => {
       // Dispatch to update global state music object
       dispatch({
         type: UPDATE_SONG,
-        payload: { songId: song._id, ...formState }
+        payload: { songId: song._id, ...song.songInfo, ...formState }
       });
       // Set new song to local state for current page
       setSong({
         _id: song._id,
         song: `${formState.artist} -- ${formState.song}`,
-        songInfo: { ...formState }
+        songInfo: { ...song.songInfo, ...formState }
       });
       // // Delete local storage to force a refresh
       // localStorage.removeItem('musicData');
