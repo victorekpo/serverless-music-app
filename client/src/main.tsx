@@ -6,6 +6,7 @@ import DashboardPage from '@/pages/dashboard';
 import SongPage from "@/pages/song";
 import SearchPage from "@/pages/search";
 import AddMusicPage from "@/pages/add";
+import { Helmet } from "react-helmet";
 import './globals.css';
 
 const router = createBrowserRouter([
@@ -43,5 +44,11 @@ const router = createBrowserRouter([
 // @ts-ignore
 const root = createRoot(document.getElementById('root'));
 root.render(
-  <RouterProvider router={router}/>
+  <div className="application">
+    <Helmet>
+      <meta charSet="utf-8"/>
+      <title>Music Collection App</title>
+    </Helmet>
+    <RouterProvider router={router}/>
+  </div>
 );

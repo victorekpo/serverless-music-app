@@ -11,7 +11,9 @@ import './song.css';
 import { Twitter } from "@/components/Cards/Twitter";
 import { debounce } from "@/utils/debounce";
 import { SEARCH_SPOTIFY_QUERY } from "@/graphql/queries/searchSpotify";
+import { Helmet } from 'react-helmet';
 
+const DEFAULT_IMAGE_URL = "https://i.etsystatic.com/22225911/r/il/9af2e1/4874151059/il_570xN.4874151059_h5kc.jpg"
 
 const SongPage = () => {
   const { songId } = useParams();
@@ -154,8 +156,16 @@ const SongPage = () => {
     }
   };
 
+
   return (
     <>
+      <div>
+        <Helmet>
+          <meta property="og:title" content={song?.song}/>
+          <meta property="og:description" content={song?.songInfo?.quotes}/>
+          <meta property="og:image" content={song?.songInfo?.spotify?.album?.image || DEFAULT_IMAGE_URL}/>
+        </Helmet>
+      </div>
       <h1 className='song-songHeading'>
         {song?.song}
       </h1>

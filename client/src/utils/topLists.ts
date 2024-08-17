@@ -31,7 +31,7 @@ export const getTopLists = (music) => {
   const top4Genres = sortedGenres.map(([genre]) => genre);
 
 // Get top 20 songs
-  const top20Songs = music.songs.filter((song => !!song.spotify)).slice(0, 20);
+  const top20Songs = music.songs.filter((song => !!song.songInfo.spotify)).slice(0, 20);
 
   return {
     top4Genres,
