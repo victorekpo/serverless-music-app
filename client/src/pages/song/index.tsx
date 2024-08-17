@@ -19,7 +19,7 @@ const SongPage = () => {
   const { songId } = useParams();
 
   const [state, dispatch] = useCtx() as any;
-  const { user, music } = state;
+  const { user, music, musicLoading } = state;
   const [edit, setEdit] = useState(false);
   const [formState, setFormState] = useState({}) as any;
   const [spotifyResults, setSpotifyResults] = useState(null) as any;
@@ -156,6 +156,13 @@ const SongPage = () => {
     }
   };
 
+  if (musicLoading) {
+    return (
+      <>
+        Loading music collection from database...
+      </>
+    )
+  }
 
   return (
     <>

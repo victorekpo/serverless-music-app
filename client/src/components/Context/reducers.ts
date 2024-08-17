@@ -7,12 +7,19 @@ import {
   SET_TAGS_QUERY,
   SET_QUOTES_QUERY,
   SET_SEARCH_RESULTS,
-  UPDATE_SONG
+  UPDATE_SONG,
+  SET_MUSIC_LOADING
 } from "@/components/Context/actions";
 // import { Song } from "@/@types/Music";
 
 export const reducer = (state: Record<string, any>, action: { type: string, payload: any }) => {
   switch (action.type) {
+    case SET_MUSIC_LOADING:
+      console.log("Setting music is loading", action.payload)
+      return {
+        ...state,
+        musicLoading: action.payload
+      };
     case SET_ALL_MUSIC:
       return {
         ...state,

@@ -9,16 +9,24 @@ import { MAX_GENRES, MAX_SONGS } from "@/constants";
 const DashboardPage = () => {
   const [songs, setSongs] = useState(new Array(MAX_SONGS).fill(null) as any)
   const [state] = useCtx() as any;
-  const { music } = state;
+  const { music, musicLoading } = state;
 
   useEffect(() => {
     (async () => {
       const { topSongs } = getTopLists(music);
-      console.log("TOP SONGS", topSongs)
+      console.log("TOP SONGS", topSongs, musicLoading)
       topSongs.length && setSongs(topSongs);
     })()
 
   }, [music])
+
+  if (musicLoading) {
+    return (
+      <>
+        Loading music collection from database...
+      </>
+    )
+  }
 
   return (
     <>

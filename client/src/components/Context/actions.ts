@@ -1,3 +1,5 @@
+export const SET_MUSIC_LOADING = 'SET_MUSIC_LOADING';
+
 export const SET_ALL_MUSIC = 'SET_ALL_MUSIC';
 
 export const SET_SONG_QUERY = 'SET_SONG_QUERY';
