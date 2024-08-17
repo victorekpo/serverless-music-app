@@ -5,10 +5,10 @@ import { useNavigate } from "react-router-dom";
 export const Navbar = () => {
   const navigate = useNavigate()
   return (
-    <div className="navbar-container" onClick={() => {
-      navigate("/")
-    }}>
-      <div className="navbar-logo">
+    <div className="navbar-container">
+      <div className="navbar-logo" onClick={() => {
+        navigate("/")
+      }}>
         Music App
       </div>
       <div><Links/></div>
