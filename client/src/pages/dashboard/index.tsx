@@ -4,7 +4,7 @@ import { Theme2Card } from "@/components/Cards/Theme2";
 import './dashboard.css';
 import { getTopLists } from "@/utils/topLists";
 import { useCtx } from "@/components/Context";
-import { MAX_SONGS } from "@/constants";
+import { MAX_GENRES, MAX_SONGS } from "@/constants";
 
 const DashboardPage = () => {
   const [songs, setSongs] = useState(new Array(MAX_SONGS).fill(null) as any)
@@ -27,7 +27,7 @@ const DashboardPage = () => {
       </h4>
       <br/>
       <div className='db-top-genres'>
-        {songs.map((item, i) => (
+        {songs.slice(0, MAX_GENRES).map((item, i) => (
           <section key={i * 100}>
             <Theme1Card
               item={item}
@@ -38,8 +38,11 @@ const DashboardPage = () => {
 
 
       {[...songs].reverse().map((item, i) => (
-        <div key={i}>
+        <div style={{ textAlign: "center" }} key={i}>
           <hr/>
+          <span>
+            {item?.genre}
+          </span>
           <div className='db-top-songs'>
             {item?.songs?.map((song, j) => (
               <section>

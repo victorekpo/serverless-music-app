@@ -38,7 +38,7 @@ export const getTopLists = (music) => {
   const genreCounts = countGenres(music.songs);
   const sortedGenres = Object.entries(genreCounts)
     .sort((a: any, b: any) => b[1].count - a[1].count) // Sort by count descending
-    .slice(0, MAX_GENRES);
+  // .slice(0, MAX_GENRES);
 
 // Return top genres and songs
   const topSongs = sortedGenres.map(([genre, value]: any) => ({ genre, ...value }));
