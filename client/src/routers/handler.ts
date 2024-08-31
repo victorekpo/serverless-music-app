@@ -9,9 +9,10 @@ import { getAssetFromKV } from "@cloudflare/kv-asset-handler";
  * @param {Router} router - The router object responsible for handling non-static asset requests.
  * @returns {Response} A Response object containing the requested asset or routed content.
  */
-export const routesAndAssetsHandler = async (event: any, router: any): Promise<Response> => {
+export const routesAndAssetsHandler = async (event: any, router: any, ...args): Promise<Response> => {
   // Extract the request from the event
-  const request = event.request;
+  const request = event;
+  const [env] = args;
 
   // Check if the request is for a static asset (e.g., bundle.js, .html, .ico, .svg, .jpg, .png, .css)
   if (
@@ -36,7 +37,7 @@ export const routesAndAssetsHandler = async (event: any, router: any): Promise<R
   }
 
   // For any other requests, handle them with the router
-  return router.handle(request);
+  return router.handle(request, env);
 };
 
 // Note: If getting Uncaught SyntaxError: Unexpected token '<', this is an indicator that the asset might not be mapped properly.

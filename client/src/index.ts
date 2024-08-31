@@ -12,6 +12,43 @@ const {
   routesAndAssetsHandler
 } = routes;
 
+// Authentication middleware
+const authMiddleware = (request, env) => {
+  const apiKey = request.headers.get('apikey')
+
+  const validApiKey = env?.API_KEY || '';
+
+  if (request.url.includes('/login')) {
+    // Allow access to the login page without authentication
+    return undefined
+  }
+
+  if (apiKey !== validApiKey) {
+    // Construct the full URL for the redirect
+    const loginUrl = new URL('/login', request.url).toString()
+    return Response.redirect(loginUrl)
+  }
+
+  // Continue to the next handler if authenticated
+  return undefined
+}
+
+// Logging middleware
+const loggerMiddleware = (request) => {
+  console.log(`Request made to: ${request.url}`)
+  return undefined
+}
+
+// Apply the authentication middleware to all routes
+router.all('*', authMiddleware)
+
+// Apply the logging middleware
+router.all('*', loggerMiddleware)
+
+router.get('/login', (request) => {
+  return new Response('Please login to continue.')
+})
+
 /**
  * Health route
  * This route is used to check the health status of the application.
@@ -55,6 +92,8 @@ router.all('*', rootHandler);
  * are called, and the response is sent. The routesAndAssetsHandler will map
  * assets and routes accordingly.
  */
-addEventListener('fetch', (event: any) => {
-  event.respondWith(routesAndAssetsHandler(event, router));
-});
+
+export default {
+  fetch: (request, ...args) =>
+    routesAndAssetsHandler(request, router, ...args)
+}
