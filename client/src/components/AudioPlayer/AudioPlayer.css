@@ -1,0 +1,214 @@
+/* Root Container */
+.audio-player {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(145deg, #0b1c2d, #1a2f4a);
+    color: #fff;
+    padding: 20px;
+    border-radius: 20px;
+    width: 350px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    font-family: "Arial", sans-serif;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Track Image */
+.image-container {
+    width: 100%;
+    height: 200px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    border-radius: 15px;
+    position: relative;
+    background: #1f3b73;
+}
+
+.track-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease, filter 0.5s ease;
+    object-position: top;
+}
+
+.image-container:hover .track-image {
+    transform: scale(1.1);
+    filter: brightness(50%);
+}
+
+.metadata {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    color: white;
+    opacity: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    font-size: 0.9em;
+    line-height: 1.4;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: opacity 0.5s ease;
+}
+
+.image-container:hover .metadata {
+    opacity: 1;
+}
+
+.metadata p {
+    animation: scroll-metadata 10s linear infinite;
+}
+
+@keyframes scroll-metadata {
+    0% {
+        transform: translateY(100%);
+    }
+    100% {
+        transform: translateY(-100%);
+    }
+}
+
+/* Track Information */
+.track-info {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.track-info h4 {
+    margin: 0;
+    font-size: 1.2em;
+    color: #d4e2fc;
+    text-align: center;
+}
+
+.track-info p {
+    margin: 5px 0 0;
+    font-size: 0.9em;
+    color: #d4e2fc;
+    text-align: center;
+}
+
+/* Controls */
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.control-btn {
+    background-color: #af451e;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 50%;
+    font-size: 1em;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.control-btn:nth-of-type(1) {
+    padding: 8px 13px 4px 8px;
+}
+
+.control-btn:nth-of-type(3) {
+    display: none;
+}
+
+.control-btn:nth-of-type(4) {
+    padding: 8px 9px 4px 12px;
+}
+
+.control-btn:hover {
+    background-color: #af451e;
+    transform: scale(1.1);
+}
+
+.play-pause-btn {
+    background-color: #af451e;
+    position: relative;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 50%;
+    font-size: 1.5em;
+    margin: 0 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.play-pause-btn:hover {
+    background-color: #af451e;
+    transform: scale(1.2);
+}
+
+/* Time Information */
+.time-info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px;
+    font-size: 0.8em;
+    color: #d4e2fc;
+}
+
+.progress-bar {
+    width: 100%;
+    margin: 0 10px;
+    appearance: none;
+    height: 5px;
+    background-color: #d4e2fc;
+    border-radius: 5px;
+    outline: none;
+    transition: background-color 0.3s ease;
+}
+
+.progress-bar::-webkit-slider-thumb {
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background-color: #d4e2fc;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Volume Control */
+.volume-control {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    right: 0;
+}
+
+.volume-control input {
+    width: 100px;
+    margin-right: 10px;
+    appearance: none;
+    height: 5px;
+    background-color: #d4e2fc;
+    border-radius: 5px;
+    outline: none;
+    transition: background-color 0.3s ease;
+}
+
+.volume-control input::-webkit-slider-thumb {
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background-color: #d4e2fc;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.volume-control span {
+    font-size: 0.8em;
+    color: #d4e2fc;
+}
