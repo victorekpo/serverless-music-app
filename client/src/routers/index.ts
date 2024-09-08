@@ -4,6 +4,8 @@ import { healthHandler } from './health/router';
 import { postHandler } from './post/router.js';
 import { rootHandler } from './root/router.js';
 import { routesAndAssetsHandler } from './handler';
+import { authMiddleware } from './auth/router';
+import { loggerMiddleware } from './logger/router';
 
 export {
   base64Handler,
@@ -11,5 +13,7 @@ export {
   healthHandler,
   postHandler,
   rootHandler,
-  routesAndAssetsHandler
+  routesAndAssetsHandler,
+  authMiddleware,
+  loggerMiddleware
 }

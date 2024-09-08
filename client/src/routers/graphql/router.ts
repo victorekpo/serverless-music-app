@@ -4,9 +4,10 @@ const JsonHeader = {
   'Content-Type': 'application/json', // Ensure the Content-Type header is set
 };
 
-export const graphqlHandler = async (req) => {
+export const graphqlHandler = async (req, env) => {
   const parsedBody = await req.json();
 
+  const API_URL = env.API_URL;
   const backendApiUrl = `${API_URL}/graphql`;
 
   const { data, error } = await fetchApi(backendApiUrl, {

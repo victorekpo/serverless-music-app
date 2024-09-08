@@ -1,6 +1,7 @@
 import { fetchApi } from "@/fetch";
 
-export const healthHandler = async () => {
+export const healthHandler = async (request, env) => {
+  const API_URL = env.API_URL;
   const backendApiUrl = `${API_URL}/health`;
 
   console.log("DYNAMIC API URL", backendApiUrl);

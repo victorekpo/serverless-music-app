@@ -9,35 +9,10 @@ const {
   healthHandler,
   postHandler,
   rootHandler,
-  routesAndAssetsHandler
+  routesAndAssetsHandler,
+  authMiddleware,
+  loggerMiddleware
 } = routes;
-
-// Authentication middleware
-const authMiddleware = (request, env) => {
-  const apiKey = request.headers.get('apikey')
-
-  const validApiKey = env?.API_KEY || '';
-
-  if (request.url.includes('/login')) {
-    // Allow access to the login page without authentication
-    return undefined
-  }
-
-  if (apiKey !== validApiKey) {
-    // Construct the full URL for the redirect
-    const loginUrl = new URL('/login', request.url).toString()
-    return Response.redirect(loginUrl)
-  }
-
-  // Continue to the next handler if authenticated
-  return undefined
-}
-
-// Logging middleware
-const loggerMiddleware = (request) => {
-  console.log(`Request made to: ${request.url}`)
-  return undefined
-}
 
 // Apply the authentication middleware to all routes
 router.all('*', authMiddleware)
@@ -94,6 +69,6 @@ router.all('*', rootHandler);
  */
 
 export default {
-  fetch: (request, ...args) =>
-    routesAndAssetsHandler(request, router, ...args)
+  fetch: (request, env, ctx) =>
+    routesAndAssetsHandler(request, router, env, ctx)
 }
