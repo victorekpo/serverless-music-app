@@ -9,8 +9,20 @@ const {
   healthHandler,
   postHandler,
   rootHandler,
-  routesAndAssetsHandler
+  routesAndAssetsHandler,
+  authMiddleware,
+  loggerMiddleware
 } = routes;
+
+// Apply the authentication middleware to all routes
+router.all('*', authMiddleware)
+
+// Apply the logging middleware
+router.all('*', loggerMiddleware)
+
+router.get('/login', (request) => {
+  return new Response('Please login to continue.')
+})
 
 /**
  * Health route
@@ -55,6 +67,8 @@ router.all('*', rootHandler);
  * are called, and the response is sent. The routesAndAssetsHandler will map
  * assets and routes accordingly.
  */
-addEventListener('fetch', (event: any) => {
-  event.respondWith(routesAndAssetsHandler(event, router));
-});
+
+export default {
+  fetch: (request, env, ctx) =>
+    routesAndAssetsHandler(request, router, env, ctx)
+}
