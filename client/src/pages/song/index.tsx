@@ -12,6 +12,7 @@ import { Twitter } from "@/components/Cards/Twitter";
 import { debounce } from "@/utils/debounce";
 import { SEARCH_SPOTIFY_QUERY } from "@/graphql/queries/searchSpotify";
 import { Helmet } from 'react-helmet';
+import AudioPlayer from "@/components/AudioPlayer/AudioPlayer";
 
 const DEFAULT_IMAGE_URL = "https://i.etsystatic.com/22225911/r/il/9af2e1/4874151059/il_570xN.4874151059_h5kc.jpg"
 
@@ -303,6 +304,17 @@ const SongPage = () => {
           </Listbox>
         </div>)}
       <hr/>
+      <AudioPlayer
+        track={{
+          url: "https://teknixco.s3.us-east-1.amazonaws.com/205%20-%20Outkast%20-%20So%20Fresh%20So%20Clean%20%28Locsmif%20Mix%29-www.torrentazos.com.mp3",
+          artist: "Sade",
+          title: "No Ordinary Love",
+          image:
+            "https://i.scdn.co/image/ab67616d0000b273ee65bbd54f993b5f01d5c511",
+          description:
+            "This is no ordinary love.. no ordinary loveee.. when you came my way.. you brightenened every day... with your sweet smile..",
+        }}
+      />
       {/*<Twitter/>*/}
     </>
   )
