@@ -1,0 +1,112 @@
+@media (max-width: 768px) {
+}
+
+
+/* target all mobile devices */
+@media only screen
+and (min-device-width: 313px)
+and (max-device-width: 1080px)
+and (-webkit-min-device-pixel-ratio: 2) {
+    .login {
+        align-items: baseline;
+    }
+
+    .loginWrapper {
+        flex-direction: column;
+        width: 80%;
+        height: 60px;
+        padding-top: 100px;
+    }
+
+    .loginLeft {
+        margin-bottom: 50px;
+    }
+
+    .loginLogo {
+        font-size: 38px;
+    }
+
+    .loginDesc {
+        font-size: 18px;
+    }
+
+    .loginBox {
+        height: 280px;
+        overflow: hidden;
+    }
+
+    .loginInput {
+        height: 30px;
+        font-size: 14px;
+    }
+
+    .loginButton {
+        height: 40px;
+        font-size: 18px;
+    }
+
+    .loginForgot {
+        font-size: 13px;
+        margin-top: -10px;
+    }
+
+    .loginRegisterButton {
+        font-size: 14px;
+    }
+
+    /* rules go here */
+}
+
+/* target iphone only */
+@media only screen
+and (min-device-width: 313px)
+and (max-device-width: 400px)
+and (-webkit-min-device-pixel-ratio: 3) {
+    .loginWrapper {
+        padding-top: 70px;
+    }
+
+    /* rules go here */
+
+}
+
+
+/* target all mobile devices-landscape */
+@media only screen
+and (min-device-width: 313px)
+and (max-device-width: 2080px)
+and (-webkit-min-device-pixel-ratio: 2)
+and (orientation: landscape) {
+    .login {
+        padding-top: 50px;
+    }
+
+    .loginLogo {
+        font-size: 50px;
+    }
+
+    .loginDesc {
+        font-size: 24px;
+    }
+
+    .loginInput {
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .loginButton {
+        height: 50px;
+    }
+
+    /* rules go here */
+}
+
+/* target iphone only-landscape */
+@media only screen
+and (min-device-width: 313px)
+and (max-device-width: 400px)
+and (-webkit-min-device-pixel-ratio: 3)
+and (orientation: landscape) {
+
+    /* rules go here */
+}

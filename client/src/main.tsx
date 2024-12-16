@@ -6,10 +6,22 @@ import DashboardPage from '@/pages/dashboard';
 import SongPage from "@/pages/song";
 import SearchPage from "@/pages/search";
 import AddMusicPage from "@/pages/add";
+import LoginPage from "@/pages/login"
+import RegisterPage from "@/pages/register"
 import { Helmet } from "react-helmet";
 import './globals.css';
 
 const router = createBrowserRouter([
+  {
+    path: '/login',
+    element: <LoginPage/>, // Login page with its own layout
+    errorElement: <ErrorPage/>,
+  },
+  {
+    path: '/register',
+    element: <RegisterPage/>, // Login page with its own layout
+    errorElement: <ErrorPage/>,
+  },
   {
     path: '/',
     element: <App/>,
@@ -36,7 +48,7 @@ const router = createBrowserRouter([
       {
         path: '/add',
         element: <AddMusicPage/>,
-      },
+      }
     ],
   },
 ]);

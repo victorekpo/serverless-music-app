@@ -15,14 +15,14 @@ const {
 } = routes;
 
 // Apply the authentication middleware to all routes
-router.all('*', authMiddleware)
+// router.all('*', authMiddleware)
 
 // Apply the logging middleware
 router.all('*', loggerMiddleware)
 
-router.get('/login', (request) => {
-  return new Response('Please login to continue.')
-})
+// router.get('/login', (request) => {
+//   return new Response('Please login to continue.')
+// })
 
 /**
  * Health route

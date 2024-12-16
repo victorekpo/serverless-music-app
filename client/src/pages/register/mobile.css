@@ -1,0 +1,111 @@
+@media (max-width: 768px) {
+}
+
+
+/* target all mobile devices */
+@media only screen
+and (min-device-width: 313px)
+and (max-device-width: 1080px)
+and (-webkit-min-device-pixel-ratio: 2) {
+    .register {
+        align-items: baseline;
+        padding-top: 100px;
+    }
+
+    .registerWrapper {
+        flex-direction: column;
+        width: 80%;
+        height: 60px;
+    }
+
+    .registerLeft {
+        margin-bottom: 50px;
+    }
+
+    .registerLogo {
+        font-size: 38px;
+    }
+
+    .registerDesc {
+        font-size: 18px;
+    }
+
+    .registerBox {
+        height: 360px;
+    }
+
+    .registerInput {
+        height: 30px;
+        font-size: 14px;
+    }
+
+    .registerButton {
+        height: 40px;
+        font-size: 18px;
+    }
+
+    .registerForgot {
+        font-size: 13px;
+        margin-top: -10px;
+    }
+
+    .registerLoginButton {
+        font-size: 14px;
+    }
+
+    /* rules go here */
+}
+
+/* target iphone only */
+@media only screen
+and (min-device-width: 313px)
+and (max-device-width: 400px)
+and (-webkit-min-device-pixel-ratio: 3) {
+    .register {
+        padding-top: 70px;
+    }
+
+    /* rules go here */
+
+}
+
+
+/* target all mobile devices-landscape */
+@media only screen
+and (min-device-width: 313px)
+and (max-device-width: 2080px)
+and (-webkit-min-device-pixel-ratio: 2)
+and (orientation: landscape) {
+    .register {
+        padding-top: 50px;
+    }
+
+    .registerLogo {
+        font-size: 50px;
+    }
+
+    .registerDesc {
+        font-size: 24px;
+    }
+
+    .registerInput {
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .registerButton {
+        height: 50px;
+    }
+
+    /* rules go here */
+}
+
+/* target iphone only-landscape */
+@media only screen
+and (min-device-width: 313px)
+and (max-device-width: 400px)
+and (-webkit-min-device-pixel-ratio: 3)
+and (orientation: landscape) {
+
+    /* rules go here */
+}

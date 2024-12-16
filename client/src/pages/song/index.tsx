@@ -181,7 +181,7 @@ const SongPage = () => {
           <img style={{ height: "350px" }} src={song.songInfo.spotify.album.image} alt=""/>
           <a href={song.songInfo.spotify.link}>Play on Spotify
             <img
-              src="https://developer.spotify.com/images/guidelines/design/icon3@2x.png" alt="Play on Spotify"
+              src="https://developer.spotify.com/images/guidelines/design/icon3.svg" alt="Play on Spotify"
               style={{ height: "75px" }}/>
           </a>
         </div>
